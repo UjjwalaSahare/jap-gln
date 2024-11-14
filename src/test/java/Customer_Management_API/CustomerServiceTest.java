@@ -40,8 +40,8 @@ class CustomerServiceTest {
     @Test
     void createCustomer() {
         Customer customer = new Customer();
-        customer.setName("John Doe");
-        customer.setEmail("john.doe@example.com");
+        customer.setName("Merry Trump");
+        customer.setEmail("Merry.Trump@example.com");
         customer.setAnnualSpend(new BigDecimal("1500.00"));
         customer.setLastPurchaseDate(LocalDate.now().minusMonths(6));
 
@@ -49,7 +49,7 @@ class CustomerServiceTest {
 
         ResponseEntity<Customer> response = customerService.createCustomer(customer);
         assertNotNull(response.getBody());
-        assertEquals("John Doe", response.getBody().getName());
+        assertEquals("Merry Trump", response.getBody().getName());
     }
 
     @Test
@@ -57,31 +57,31 @@ class CustomerServiceTest {
         UUID id = UUID.randomUUID();
         Customer customer = new Customer();
         customer.setId(id);
-        customer.setName("John Doe");
+        customer.setName("Merry Trump");
 
         when(customerRepository.findById(id)).thenReturn(Optional.of(customer));
 
         ResponseEntity<Customer> response = customerService.getCustomerById(id);
-        assertEquals("John Doe", response.getBody().getName());
+        assertEquals("Merry Trump", response.getBody().getName());
     }
 
     @Test
     void getCustomerByNameOrEmail() {
         Customer customer1 = new Customer();
-        customer1.setName("John Doe");
+        customer1.setName("Merry Trump");
         Customer customer2 = new Customer();
         customer2.setEmail("john.doe@example.com");
 
-        when(customerRepository.findByName("John Doe")).thenReturn(Arrays.asList(customer1));
-        when(customerRepository.findByEmail("john.doe@example.com")).thenReturn(Arrays.asList(customer2));
+        when(customerRepository.findByName("Merry Trump")).thenReturn(Arrays.asList(customer1));
+        when(customerRepository.findByEmail("Merry.Trump@example.com")).thenReturn(Arrays.asList(customer2));
 
-        ResponseEntity<List<Customer>> responseByName = customerService.getCustomerByNameOrEmail("John Doe", null);
-        ResponseEntity<List<Customer>> responseByEmail = customerService.getCustomerByNameOrEmail(null, "john.doe@example.com");
+        ResponseEntity<List<Customer>> responseByName = customerService.getCustomerByNameOrEmail("Merry Trump", null);
+        ResponseEntity<List<Customer>> responseByEmail = customerService.getCustomerByNameOrEmail(null, "Merry.Trump@example.com");
 
         assertEquals(1, responseByName.getBody().size());
-        assertEquals("John Doe", responseByName.getBody().get(0).getName());
+        assertEquals("Merry Trump", responseByName.getBody().get(0).getName());
         assertEquals(1, responseByEmail.getBody().size());
-        assertEquals("john.doe@example.com", responseByEmail.getBody().get(0).getEmail());
+        assertEquals("Merry.Trump@example.com", responseByEmail.getBody().get(0).getEmail());
     }
 
     @Test
@@ -89,11 +89,11 @@ class CustomerServiceTest {
         UUID id = UUID.randomUUID();
         Customer existingCustomer = new Customer();
         existingCustomer.setId(id);
-        existingCustomer.setName("John Doe");
+        existingCustomer.setName("Merry Trump");
 
         Customer customerDetails = new Customer();
-        customerDetails.setName("Jane Doe");
-        customerDetails.setEmail("jane.doe@example.com");
+        customerDetails.setName("Mariya Trump");
+        customerDetails.setEmail("Mariya.Trump@example.com");
         customerDetails.setAnnualSpend(new BigDecimal("2000.00"));
         customerDetails.setLastPurchaseDate(LocalDate.now());
 
@@ -103,8 +103,8 @@ class CustomerServiceTest {
         ResponseEntity<Customer> response = customerService.updateCustomer(id, customerDetails);
 
         assertNotNull(response.getBody());
-        assertEquals("Jane Doe", response.getBody().getName());
-        assertEquals("jane.doe@example.com", response.getBody().getEmail());
+        assertEquals("Mariya Trump", response.getBody().getName());
+        assertEquals("Mariya.Trump@example.com", response.getBody().getEmail());
     }
 
     @Test
@@ -132,7 +132,7 @@ class CustomerServiceTest {
         UUID id = UUID.randomUUID();
         Customer customer = new Customer();
         customer.setId(id);
-        customer.setName("John Doe");
+        customer.setName("Merry Trump");
         customer.setAnnualSpend(new BigDecimal("1500.00"));
         customer.setLastPurchaseDate(LocalDate.now().minusMonths(6));
 
